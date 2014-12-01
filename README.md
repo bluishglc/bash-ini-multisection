@@ -15,3 +15,6 @@ You should be able to see how to use it from the test script `test.sh`, or use t
     smoked mackerel with salad
     $ echo $time
     5 minutes
+    $ cfg_section global        # only one of these so no need for a key number.
+    $ echo $subject
+    meal ideas.
