@@ -3,8 +3,6 @@
 cfg_parser ()
 {
     ini="$(<$1)"                # read the file
-    #ini="${ini//[/\[}"          # escape [
-    #ini="${ini//]/\]}"          # escape ]
     oldifs=$IFS
     IFS=$'\n' && ini=( ${ini} ) # convert to line-array
     ini=( ${ini[*]//;*/} )      # remove comments with ;
