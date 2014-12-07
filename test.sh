@@ -1,4 +1,5 @@
-. ./ini-multikey.sh
+mydir=${0%/*}
+. $mydir/ini-parse.sh
 
 cfg_parser test.ini
 
