@@ -3,8 +3,8 @@
 cfg_parser ()
 {
     ini="$(<$1)"                # read the file
-    ini="${ini//[/\[}"          # escape [
-    ini="${ini//]/\]}"          # escape ]
+    #ini="${ini//[/\[}"          # escape [
+    #ini="${ini//]/\]}"          # escape ]
     oldifs=$IFS
     IFS=$'\n' && ini=( ${ini} ) # convert to line-array
     ini=( ${ini[*]//;*/} )      # remove comments with ;
@@ -16,16 +16,20 @@ cfg_parser ()
     section=CFG_NULL
     vals=""
     for line in "${ini[@]}"; do
+      #echo $line
       if [ "${line:0:1}" == "[" ] ; then
+        #echo "section mark"
         # close previous section
         eval "cfg_${section}+=(\"$vals\")"
+        #eval echo "cfg_$section[@]"
         if [ "$line" == "[CFG_END]" ]; then
           break
         fi
         # new section
         section=${line#[}
         section=${section%]}
-        secs=${sections[*]}
+        #echo "section: $section"
+        secs="${sections[*]}"
         if [ "$secs" == "${secs/$section//}" ] ; then
           sections+=($section)
           eval "cfg_${section}=()"
