@@ -47,11 +47,13 @@ cfg_parser ()
 }
 
 cfg_section_keys ()
+# read number of keys (subsections) in a given section
 {
   eval "keys=(\${!cfg_$1[@]})"
 }
 
 cfg_section ()
+# read in settings for a specific key in a given section
 {
   section=$1
   key=$2
@@ -62,3 +64,11 @@ cfg_section ()
   eval $vals
 }
 
+cfg_section_merge ()
+# read and merge all settings for all keys of a given section
+{
+  cfg_section_keys $1
+  for key in "${keys[@]}"; do
+    cfg_section $section $key
+  done
+}
